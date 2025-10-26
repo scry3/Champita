@@ -1,0 +1,194 @@
+/* ========== CONFIGURACIÓN GENERAL ========== */
+* {
+  box-sizing: border-box; /* Padding y borde dentro del ancho total */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  margin: 0;
+}
+
+
+.presentacion,
+.ofertas {
+  padding: 0 1rem; /* espacio horizontal solo para estas secciones */
+  margin: 2rem 0;  /* separación vertical entre secciones */
+}
+
+
+/* ================= HEADER ================= */
+header {
+  background-color: #b22222;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+header p {
+  margin: 0.2rem 0;
+}
+
+/* Menú de navegación */
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* ================= PRESENTACIÓN (FOTOS DEL LOCAL) ================= */
+.presentacion {
+  display: flex; /* flex para alinear las fotos horizontalmente */
+  flex-wrap: wrap; /* que bajen a la siguiente fila si no entran */
+  gap: 1rem; /* espacio entre fotos */
+  justify-content: center; /* centrar las fotos */
+  margin: 2rem 0;
+}
+
+.presentacion div {
+  flex: 1 1 200px; /* ancho flexible mínimo 200px */
+  max-width: 350px; /* no se hace gigante */
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative; /* para el span encima */
+}
+
+.presentacion img {
+  width: 100%;
+  height: 250px; /* altura fija para todas las fotos */
+  object-fit: cover; /* recorta la imagen sin deformar */
+}
+
+/* Mini título sobre la foto */
+.presentacion span {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* ================= CONTACTO (FB / IG / MAIL) ================= */
+.contacto {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; /* permite que los divs bajen en pantallas chicas */
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+
+.contacto div {
+  flex: 1 1 200px; /* ancho flexible, mínimo 200px */
+  text-align: center;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+.contacto h3 {
+  margin-top: 0;
+  color: #b22222;
+}
+
+.contacto a {
+  text-decoration: none;
+  color: #333;
+}
+
+.contacto a:hover {
+  color: #b22222; /* Hover para resaltar */
+}
+
+
+
+/* ================= OFERTAS ================= */
+.ofertas {
+  display: grid; /* Grid para organizar las tarjetas de ofertas */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas adaptables */
+  gap: 1.5rem; /* Espacio entre las tarjetas */
+  margin: 2rem 0;
+}
+
+.oferta {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out; /* Animación al pasar mouse */
+  padding: 0.3rem; /* Espacio interno para que el contenido no toque los bordes */
+  box-sizing: border-box; /* Padding incluido en el ancho total */
+}
+
+.oferta:hover {
+  transform: translateY(-5px); /* Levanta la tarjeta al pasar mouse */
+}
+
+.oferta img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover; /* Ajusta la imagen sin deformar */
+}
+
+/* Contenedor de info (nombre + precio) */
+.oferta-info {
+  padding: 1rem 1.2rem; /* Espacio interno suficiente para separar texto de los bordes */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 90%; /* Deja margen a los lados dentro de la tarjeta */
+  margin: 0 auto; /* Centra el bloque de info */
+}
+
+/* Texto dentro de la info */
+.oferta-info h3 {
+  font-size: 1.2rem;
+  color: #1f5eac;
+  margin: 0; /* El margen ya no es necesario gracias al padding de oferta-info */
+}
+
+.oferta-info p {
+  margin: 0; /* Igual que h3, el padding interno separa el texto del borde */
+  font-weight: bold;
+}
+
+
+
+/* Botones (generales: ofertas, admin) */
+button {
+  background-color: #b22222;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #d43737;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background-color: #b22222;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
