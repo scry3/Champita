@@ -1,10 +1,5 @@
 [
   {
-    "nombre": "Asado",
-    "precio": 5000,
-    "imagen": "img/asado.jpg"
-  },
-  {
     "nombre": "lechugaaa",
     "precio": 2220,
     "imagen": "img/lechuga.jpg"
@@ -13,5 +8,11 @@
     "nombre": "queseyo",
     "precio": 100000,
     "imagen": "img/algo.jpg"
+  },
+  {
+    "nombre": "flasfka",
+    "precio": "234",
+    "descripcion": "chorizo.jpg",
+    "imagen": "img/1761536628176.jpg"
   }
 ]

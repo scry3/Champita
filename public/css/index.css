@@ -118,6 +118,13 @@ header nav a:hover {
 
 
 /* ================= OFERTAS ================= */
+.titulo-ofertas {
+  font-size: 1.8rem;
+  color: #b22222;
+  margin-bottom: 1rem;
+  text-align: center; /* centrado opcional */
+}
+
 .ofertas {
   display: grid; /* Grid para organizar las tarjetas de ofertas */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas adaptables */

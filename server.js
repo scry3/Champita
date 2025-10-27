@@ -1,16 +1,52 @@
+require('dotenv').config();
+
+const path = require('path');
 const express = require("express");
 const fs = require("fs");
-const bodyParser = require("body-parser");
 const cors = require("cors");
+const multer = require('multer');
 
 const app = express();
 const PORT = 3000;
 
+// ======= MIDDLEWARE =======
 app.use(cors());
-app.use(bodyParser.json());
 app.use(express.static("public"));
 
-// Ruta para obtener las ofertas
+// ======= PROTECCIÓN DE ADMIN =======
+const auth = { 
+  user: process.env.ADMIN_USER, 
+  pass: process.env.ADMIN_PASS 
+};
+
+app.get('/supersupersecreto.html', (req, res) => {
+  const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
+  const [user, pass] = Buffer.from(b64auth, 'base64').toString().split(':');
+
+  if (user === auth.user && pass === auth.pass) {
+    return res.sendFile(path.join(__dirname, 'private', 'supersupersecreto.html'));
+  }
+
+  res.set('WWW-Authenticate', 'Basic realm="Admin Area"');
+  res.status(401).send('Autorización requerida');
+});
+
+// ======= MULTER (SUBIR IMÁGENES) =======
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, 'public', 'img')); // Carpeta donde se guardan las imágenes
+  },
+  filename: (req, file, cb) => {
+    const nombreArchivo = Date.now() + path.extname(file.originalname); // Evita nombres repetidos
+    cb(null, nombreArchivo);
+  }
+});
+
+const upload = multer({ storage });
+
+// ======= RUTAS =======
+
+// Obtener todas las ofertas
 app.get("/ofertas", (req, res) => {
   fs.readFile("ofertas.json", "utf8", (err, data) => {
     if (err) return res.status(500).send("Error al leer ofertas");
@@ -18,27 +54,34 @@ app.get("/ofertas", (req, res) => {
   });
 });
 
-// Ruta para agregar una nueva oferta
-app.post("/ofertas", (req, res) => {
+// Agregar nueva oferta con imagen
+app.post("/ofertas", upload.single('imagen'), (req, res) => {
   const nuevaOferta = req.body;
+  const imagen = req.file ? `img/${req.file.filename}` : null;
+
   fs.readFile("ofertas.json", "utf8", (err, data) => {
     if (err) return res.status(500).send("Error al leer archivo");
+
     const ofertas = JSON.parse(data);
+    nuevaOferta.imagen = imagen;
     ofertas.push(nuevaOferta);
+
     fs.writeFile("ofertas.json", JSON.stringify(ofertas, null, 2), (err) => {
       if (err) return res.status(500).send("Error al guardar");
-      res.send("Oferta agregada");
+      res.send("Oferta agregada correctamente");
     });
   });
 });
 
-// Ruta para borrar una oferta por nombre
+// Borrar oferta por nombre
 app.delete("/ofertas/:nombre", (req, res) => {
   const nombre = req.params.nombre;
   fs.readFile("ofertas.json", "utf8", (err, data) => {
     if (err) return res.status(500).send("Error al leer archivo");
+
     let ofertas = JSON.parse(data);
     ofertas = ofertas.filter(o => o.nombre !== nombre);
+
     fs.writeFile("ofertas.json", JSON.stringify(ofertas, null, 2), (err) => {
       if (err) return res.status(500).send("Error al guardar");
       res.send("Oferta eliminada");
