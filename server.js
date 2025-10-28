@@ -1,13 +1,21 @@
 require('dotenv').config();
 
+// Módulo 'path': sirve para manejar y unir rutas de archivos o carpetas del sistema, de forma segura.
 const path = require('path');
+// Módulo 'express': framework que simplifica la creación de servidores web en Node.js.
 const express = require("express");
+// Módulo 'fs' (File System): permite leer, escribir, modificar o borrar archivos en el sistema.
 const fs = require("fs");
+// Módulo 'cors': permite que tu servidor acepte peticiones desde otros dominios (necesario si el frontend y backend están separados).
 const cors = require("cors");
+// Módulo 'multer': se usa para manejar la subida de archivos (por ejemplo, imágenes enviadas desde un formulario).
 const multer = require('multer');
 
+// Simplificar la creacion del server.
 const app = express();
-const PORT = 3000;
+
+
+const PORT = process.env.PORT || 3000;
 
 // ======= MIDDLEWARE =======
 app.use(cors());

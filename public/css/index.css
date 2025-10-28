@@ -27,12 +27,13 @@ header {
 }
 
 header h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   margin: 0;
 }
 
 header p {
   margin: 0.2rem 0;
+  font-size: 1rem;
 }
 
 /* Menú de navegación */
@@ -40,41 +41,78 @@ header nav a {
   color: #fff;
   text-decoration: none;
   margin: 0 0.5rem;
+  font-size: 1.5rem;
 }
 
 header nav a:hover {
   text-decoration: underline;
 }
 
+
+
+/* ======== BANNER "CONOCÉ MÁS SOBRE NOSOTROS" ======== */
+.banner-nosotros {
+  position: relative;
+  width: 100%;
+  height: 500px; 
+  background-image: url("../img/banner.jpg"); /* cambiá por tu imagen */
+  background-size: cover; /* que cubra todo el ancho */
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-nosotros .overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* capa negra transparente */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-nosotros h2 {
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+
 /* ================= PRESENTACIÓN (FOTOS DEL LOCAL) ================= */
 .presentacion {
-  display: flex; /* flex para alinear las fotos horizontalmente */
-  flex-wrap: wrap; /* que bajen a la siguiente fila si no entran */
-  gap: 1rem; /* espacio entre fotos */
-  justify-content: center; /* centrar las fotos */
+  display: flex;
+  flex-wrap: wrap; /* que bajen de línea */
+  gap: 1rem;
+  justify-content: center;
   margin: 2rem 0;
 }
 
+/* Cada foto del local */
 .presentacion div {
-  flex: 1 1 200px; /* ancho flexible mínimo 200px */
-  max-width: 350px; /* no se hace gigante */
-  border-radius: 8px;
+  flex: 1 1 calc(33.333% - 1rem); /* tres fotos por fila */
+  max-width: calc(33.333% - 1rem);
+  border-radius: 4px;
   overflow: hidden;
-  position: relative; /* para el span encima */
+  position: relative;
+  box-sizing: border-box;
 }
+
 
 .presentacion img {
   width: 100%;
-  height: 250px; /* altura fija para todas las fotos */
-  object-fit: cover; /* recorta la imagen sin deformar */
+  height: 250px;
+  object-fit: cover;
 }
 
-/* Mini título sobre la foto */
+/* Texto sobre la foto */
 .presentacion span {
   position: absolute;
   bottom: 5px;
   left: 5px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
@@ -134,7 +172,7 @@ header nav a:hover {
 
 .oferta {
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   transition: transform 0.2s ease-in-out; /* Animación al pasar mouse */
@@ -198,4 +236,22 @@ footer {
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
+}
+
+
+
+
+/* Responsive celulares */
+@media (max-width: 768px) {
+  .presentacion div {
+    flex: 1 1 calc(50% - 1rem); /* dos fotos por fila */
+    max-width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .presentacion div {
+    flex: 1 1 100%; /* una foto por fila */
+    max-width: 100%;
+  }
 }
